@@ -9,7 +9,10 @@
                         <slot />
                         <button
                             class="text-white mt-8 bg-weather-primary py-2 px-6"
-                            @click="$emit('close-modal')"> Close </button>
+                            @click="$emit('close-modal')"
+                            > 
+                            Close 
+                        </button>
                     </div>
                 </Transition>
             </div>
