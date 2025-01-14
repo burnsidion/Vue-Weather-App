@@ -4,7 +4,7 @@
             <RouterLink :to="{ name: 'home' }">
                 <div class="flex items-center gap-3">
                     <i class="fa-solid fa-sun text-2xl"></i>
-                    <p class="text-2xl">The Local Weather</p>
+                    <p class="text-2xl">What's the Weather?</p>
                 </div>
             </RouterLink>
 
@@ -18,7 +18,7 @@
                 <div class="text-black">
                     <h1 class="text-2xl mb-1">About:</h1>
                     <p class="mb-4">
-                        The Local Weather allows you to track the current and
+                        What's the Weather allows you to track the current and
                         future weather of cities of your choosing.
                     </p>
                     <h2 class="text-2xl">How it works:</h2>
