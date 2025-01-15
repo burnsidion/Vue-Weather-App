@@ -9,12 +9,12 @@ import axios from 'axios';
 import { useRoute } from 'vue-router';
 
 const route = useRoute()
-const weatherMapAPIKey = "61cf1a006d47c12d87fcdb86c327fe27";
+const weatherMapAPIKey = "a1f462021e240a38a6de21f2df0c07c6";
 
 const getWeatherData = async () => {
     try {
         const weather = await axios.get(
-            `https://api.openweathermap.org/data/3.0/onecall?lat=${route.query.lat}&lon=${route.query.long}&exclude={part}&appid=${weatherMapAPIKey}`
+            `http://api.openweathermap.org/data/3.0/onecall?lat=${route.query.lat}&lon=${route.query.lat}&appid=${weatherMapAPIKey}`
         );
         console.log(weather)
 
@@ -33,8 +33,5 @@ const getWeatherData = async () => {
         console.log(error)
     }
 }
-
-
 const weatherData = await getWeatherData();
-console.log(weatherData);
 </script>
