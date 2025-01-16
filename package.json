@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "eslint-plugin-organize-imports": "^0.0.46",
+    "eslint-plugin-path-alias": "^2.1.0",
+    "eslint-prettier-config": "^1.0.1",
+    "prettier-plugin-organize-imports": "^4.1.0"
+  }
+}
