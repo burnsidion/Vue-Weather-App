@@ -38,7 +38,6 @@
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
-import CityView from './CityView.vue';
 
 const searchQuery = ref("");
 const queryTimeout = ref(null);
@@ -84,7 +83,6 @@ const previewCity = (searchResult) => {
       preview: true,
     },
   })
-  console.log(searchResult, city, state, lat, long);
 }
 </script>
 
