@@ -6,7 +6,9 @@
                 You are currently previewing this city, click the "+" to track this city!
             </p>
         </div>
-        <div v-if="!route.query.preview" class="text-white p-4 bg-weather-secondary w-full text-center">
+        <div 
+            v-show="showBanner"
+            v-if="!route.query.preview" class="text-white p-4 bg-weather-secondary w-full text-center">
             <p>
                 You are currently tracking this city!
             </p>
@@ -19,11 +21,11 @@
                 {{ `, ${currentTime}` }}
             </p>
             <p class="text-8xl mb-8 ml-6">
-                {{ currentTemp }}&deg;
+                {{ rounder(weatherData.current.temp) }}&deg;
             </p>
             <p>
                 Feels Like: 
-                {{ feelsLikeTemp }}&deg;
+                {{ rounder(weatherData.current.feels_like) }}&deg;
             </p>
             <p class="capitalize">
                 {{  weatherDescription }}
@@ -82,8 +84,8 @@
                         alt="Various icons displaying the weather for that day of the week">
                     
                     <div class="flex gap-2 flex-1 justify-end">
-                        <p> H: {{ dailyHigh(/** @type {any} */ day) }} </p>
-                        <p> L: {{ dailyLow(/** @type {any} */ day) }} </p>
+                        <p> H: {{ rounder(day.temp.max) }} </p>
+                        <p> L: {{ rounder(day.temp.min) }} </p>
                     </div>
                 </div>
              </div>
@@ -94,10 +96,14 @@
 <script setup>
 import axios from 'axios';
 import { useRoute } from 'vue-router';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 const route = useRoute()
+const showBanner = ref(true);
 
+if(!route.params.preview) {
+    setTimeout(() => showBanner.value = false, 2000)
+}
 const getWeatherData = async (_route=route) => {
     try {
         const weather = await axios.get( `http://localhost:3000/weather?q=${encodeURI(JSON.stringify({
@@ -159,13 +165,10 @@ const dailyIcon = (/** @type {any} */ day) => {
     return day.weather[0].icon; 
 }
 
-const dailyHigh = (/** @type {any} */ day) => {
-    return Math.round(day.temp.max)
+const rounder = (value) => {
+    return Math.round(value);
 }
 
-const dailyLow = (/** @type {any} */ day) => {
-    return Math.round(day.temp.min)
-}
 const currentDate = computed(() => {
     return new Date(weatherData.currentTime)
     .toLocaleDateString(
@@ -187,14 +190,6 @@ const currentTime = computed(() => {
             timestyle: "short"
         }
     );
-});
-
-const currentTemp = computed(() => {
-    return Math.round(weatherData.current.temp);
-});
-
-const feelsLikeTemp = computed(() => {
-    return Math.round(weatherData.current.feels_like);
 });
 
 const weatherDescription = computed(() => {
