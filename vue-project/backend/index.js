@@ -1,3 +1,4 @@
+// @ts-nocheck
 const express = require("express");
 require("dotenv").config();
 
@@ -14,6 +15,9 @@ const mapboxAPIKey = process.env.MAPBOX_API_KEY;
 
 const weatherMapUrl = 'https://api.openweathermap.org/data/3.0/onecall';
 const weatherMapAPIKey = process.env.WEATHERMAP_API_KEY;
+
+const savedCityWeatherUrl = 'https://api.openweathermap.org/data/2.5/weather';
+const savedCityAPIKey = process.env.SAVEDCITY_API_KEY;
 
 app.use(express.json())
 

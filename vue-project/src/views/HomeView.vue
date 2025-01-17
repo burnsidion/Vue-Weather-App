@@ -1,6 +1,6 @@
 <template>
   <main class="container text-white">
-    <div class="pt-4 mb-8 relative">
+    <div class="nfc-search-input pt-4 mb-8 relative">
       <input 
         @input="getSearchResults"
         type="text"
@@ -31,23 +31,43 @@
           </template>
         </ul>
     </div>
+
+
+    <div class="nfc-city-list flex flex-col gap-4">
+      <Suspense>
+        <CityList />
+        
+        <template #fallback>
+          <p> ....Loading</p>
+        </template>
+      </Suspense>
+    </div>
   </main>
 </template>
 
 <script setup>
 import axios from 'axios';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import { ref } from 'vue';
+import CityList from '@/components/CityList.vue';
 
 const searchQuery = ref("");
 const queryTimeout = ref(null);
 const mapboxSearchResults = ref(null);
 const searchError = ref(null)
-
 const mapBoxUrl = `http://localhost:3000/`;
+const trackedCities = ref([]);
+
+const route = useRoute();
+if(localStorage.getItem('savedCities')) {
+        // @ts-ignore
+        trackedCities.value = JSON.parse(localStorage.getItem('savedCities'));
+    }
 
 const getSearchResults = () => {
+  // @ts-ignore
   clearTimeout(queryTimeout.value)
+  // @ts-ignore
   queryTimeout.value = setTimeout(async () => {
     if(searchQuery.value !== '') {
       try {
@@ -56,6 +76,7 @@ const getSearchResults = () => {
       );
       mapboxSearchResults.value = results.data.features;
       } catch {
+        // @ts-ignore
         searchError.value = true
       }
     
@@ -67,22 +88,37 @@ const getSearchResults = () => {
 
 const router = useRouter();
 
-const previewCity = (searchResult) => {
+const previewCity = (/** @type {any} */ searchResult) => {
   const city = searchResult.properties.context.place.name;
   const state = searchResult.properties.context.region.name;
 
   const lat = searchResult.geometry.coordinates[1];
   const long = searchResult.geometry.coordinates[0];
+  
+  const cityExists = trackedCities.value.some(trackedCity => 
+    trackedCity.state === state && trackedCity.city === city
+  );
 
-  router.push({
-    name: "cityView",
-    params: { state: state, city: city },
-    query: { 
-      lat: lat,
-      long: long,
-      preview: true,
-    },
-  })
+  if(!cityExists) {
+    router.push({
+      name: "cityView",
+      params: { state: state, city: city },
+      query: { 
+        lat: lat,
+        long: long,
+        preview: true,
+      },
+    })
+  } else {
+    router.push({
+      name: "cityView",
+      params: { state: state, city: city },
+      query: { 
+        lat: lat,
+        long: long
+      },
+    })
+  }
 }
 </script>
 
