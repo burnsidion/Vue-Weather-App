@@ -57,7 +57,7 @@
 import { RouterLink, useRoute, useRouter} from 'vue-router';
 import BaseModal from './BaseModal.vue';
 import { ref } from 'vue';
-import { uid } from 'uid';``
+import { uid } from 'uid';
 
 const modalActive = ref(null);
 const savedCities = ref([]);
@@ -66,6 +66,7 @@ const router = useRouter();
 
 const addCity = () => {
     if(localStorage.getItem('savedCities')) {
+        // @ts-ignore
         savedCities.value = JSON.parse(localStorage.getItem('savedCities'));
     }
     const locationObj = {
@@ -77,13 +78,26 @@ const addCity = () => {
             long: route.query.long 
         },
     };
-    savedCities.value.push(locationObj); 
-    localStorage.setItem('savedCities', JSON.stringify(savedCities.value));
-    let query = Object.assign({}, route.query);
+
+    // Check if city already exists in local storage
+    const cityExists = savedCities.value.some(city => 
+        city.state === locationObj.state && city.city === locationObj.city
+    );
+
+    // Only add the city if it doesn't already exist
+    if (!cityExists) {
+        savedCities.value.push(locationObj); 
+        localStorage.setItem('savedCities', JSON.stringify(savedCities.value));
+    } else {
+        console.log('City already saved!');
+    }
+
+    const query = Object.assign({}, route.query);
     delete query.preview;
     router.replace({ query });
 }
 const toggleModal = () => {
+    // @ts-ignore
     modalActive.value = !modalActive.value;
 }
 </script>

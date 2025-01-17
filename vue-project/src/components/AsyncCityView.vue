@@ -6,6 +6,11 @@
                 You are currently previewing this city, click the "+" to track this city!
             </p>
         </div>
+        <div v-if="!route.query.preview" class="text-white p-4 bg-weather-secondary w-full text-center">
+            <p>
+                You are currently tracking this city!
+            </p>
+        </div>
         <!-- Weather Overview -->
         <div class="flex flex-col items-center text-white py-12 ">
             <h1 class="text-4xl mb-2"> {{ route.params.city }}</h1>
@@ -100,7 +105,7 @@ const getWeatherData = async (_route=route) => {
             state: route.params.state, 
             lat: route.query['lat'],
             lon: route.query.long
-        }))}`)
+        }))}`);
 
         // calculate the current date/time 
         const localOffset = new Date().getTimezoneOffset() * 60000;
@@ -178,6 +183,7 @@ const currentTime = computed(() => {
     .toLocaleTimeString(
         'en-us',
         {
+            // @ts-ignore
             timestyle: "short"
         }
     );
