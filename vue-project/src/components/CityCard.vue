@@ -14,17 +14,25 @@
                     L: {{ rounder(city.weather.daily[0].temp.min) }}&deg;
                 </span>
             </div>
+            <span class="capitalize self-end">
+                {{ city.weather.current.weather[0].description }}
+            </span>
         </div>
     </div>
 </template>
 
 <script setup>
+import { computed } from 'vue';
 defineProps({
     city: { 
         type: Object,
         default: () => {},
     }
 })
+
+const weatherIcon = (city) => {
+    return city.weather.current.weather[0].icon;
+};
 
 const rounder = (value) => {
     return Math.round(value);
