@@ -6,25 +6,33 @@
         </div>
         <div class="flex flex-col gap-2">
             <p class="text-3xl self-end"> {{ rounder(city.weather.current.temp) }}&deg;</p>
-            <div class="flex gap-2">
-                <span class="text-xs">
+            <div class="flex gap-2 self-end">
+                <span class="text-xs self-end">
                     H: {{ rounder(city.weather.daily[0].temp.max) }}&deg;
                 </span>
                 <span class="text-xs">
                     L: {{ rounder(city.weather.daily[0].temp.min) }}&deg;
                 </span>
             </div>
+            <span class="capitalize self-end">
+                {{ city.weather.current.weather[0].description }}
+            </span>
         </div>
     </div>
 </template>
 
 <script setup>
+import { computed } from 'vue';
 defineProps({
     city: { 
         type: Object,
         default: () => {},
     }
 })
+
+const weatherIcon = (city) => {
+    return city.weather.current.weather[0].icon;
+};
 
 const rounder = (value) => {
     return Math.round(value);
