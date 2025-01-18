@@ -90,15 +90,22 @@
                 </div>
              </div>
         </div>
+        <div 
+            class="flex items-center gap-2 py-12 text-white cursor-pointer duration-150 hover:text-red-500"
+            @click="removeCity">
+            <i class="fa-solid fa-trash"></i>
+            <p>Remove City</p> 
+        </div>
     </div>
 </template>
 
 <script setup>
 import axios from 'axios';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { computed, ref } from 'vue';
 
-const route = useRoute()
+const route = useRoute();
+const router = useRouter();
 const showBanner = ref(true);
 
 if(!route.params.preview) {
@@ -141,15 +148,15 @@ const hourlyData = (/** @type {any} */ hour) => {
             hour: "numeric"
         }
     )
-}
+};
 
 const weatherOverviewIcon = (/** @type {any} */ hour) => {
     return hour.weather[0].icon;
-}
+};
 
 const hourlyTemp = (/** @type {any} */ hour) => {
     return Math.round(hour.temp);
-}
+};
 
 const dayOfTheWeek = (/** @type {any} */ day) => {
     return new Date(day.dt * 1000)
@@ -159,15 +166,30 @@ const dayOfTheWeek = (/** @type {any} */ day) => {
             weekday: "long"
         }
     )
-}
+};
 
 const dailyIcon = (/** @type {any} */ day) => {
     return day.weather[0].icon; 
-}
+};
 
 const rounder = (value) => {
     return Math.round(value);
-}
+};
+
+const removeCity = () => {
+    const cities = JSON.parse(localStorage.getItem('savedCities')) || [];
+    
+    const cityIndex = cities.findIndex(city => city.id === route.query.id);
+
+    if (cityIndex !== -1) {
+        cities.splice(cityIndex, 1);
+        
+        localStorage.setItem('savedCities', JSON.stringify(cities));
+    }
+    router.push({
+        name: 'home'
+    });
+};
 
 const currentDate = computed(() => {
     return new Date(weatherData.currentTime)

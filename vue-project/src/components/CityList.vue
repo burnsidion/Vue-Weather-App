@@ -31,18 +31,18 @@ const getCities = async () => {
 
     const requests = [];
     savedCities.value.forEach(( /** @type {any} */city) => {
-    requests.push(axios.get( `http://localhost:3000/weather?q=${encodeURI(JSON.stringify({
-            city: city.city, 
-            state: city.state, 
-            lat: city.coords.lat,
-            lon: city.coords.long
+      requests.push(axios.get( `http://localhost:3000/weather?q=${encodeURI(JSON.stringify({
+          city: city.city, 
+          state: city.state, 
+          lat: city.coords.lat,
+          lon: city.coords.long
         }))}`).then((v) => v.data)); 
-    });
-    const weatherData = await Promise.all(requests);
-    weatherData.forEach((value, index) => {
-      savedCities.value[index].weather = value;
-    });
-  }
+      });
+      const weatherData = await Promise.all(requests);
+      weatherData.forEach((value, index) => {
+        savedCities.value[index].weather = value;
+      });
+    }
 };
 
 await getCities();
@@ -56,6 +56,7 @@ const goToCityView = async (city) => {
        state: city.state
     },
     query: {
+      id: city.id,
       lat: city.coords.lat,
       long: city.coords.long
     }
