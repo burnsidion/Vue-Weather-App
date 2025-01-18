@@ -5,14 +5,15 @@
         @input="getSearchResults"
         type="text"
         v-model="searchQuery"
-        placeholder="Search for a city"
+        placeholder="Search for a city..."
         class="py-2 px-1 w-full bg-transparent border-b focus:border-weather-secondary 
         focus:outline-none 
-        focus:shadow-[0px_1px_0_0_#004E71]"
+        focus:shadow-[0px_1px_0_0_#004E71]
+        animate-pulse"
         >
         <ul 
           v-if="mapboxSearchResults"
-          class="absolute bg-weather-secondary text-white w-full shadow-m py-2 px-1 top-[66px]">
+          class="absolute bg-weather-city-search text-white w-full shadow-md py-2 px-1 top-[66px]">
           <p v-if="searchError"> 
             Sorry, looks like he's dead, Jim. Please try again. 
           </p>

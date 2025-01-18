@@ -91,7 +91,7 @@
              </div>
         </div>
         <div 
-            class="flex items-center gap-2 py-12 text-white cursor-pointer duration-150 hover:text-red-500"
+            class="flex items-center gap-2 py-12 text-white cursor-pointer duration-150 hover:text-red-500 hover:animate-ping"
             @click="removeCity">
             <i class="fa-solid fa-trash"></i>
             <p>Remove City</p> 
@@ -109,7 +109,7 @@ const router = useRouter();
 const showBanner = ref(true);
 
 if(!route.params.preview) {
-    setTimeout(() => showBanner.value = false, 2000)
+    setTimeout(() => showBanner.value = false, 3000)
 }
 const getWeatherData = async (_route=route) => {
     try {
