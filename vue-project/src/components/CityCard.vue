@@ -6,8 +6,8 @@
         </div>
         <div class="flex flex-col gap-2">
             <p class="text-3xl self-end"> {{ rounder(city.weather.current.temp) }}&deg;</p>
-            <div class="flex gap-2">
-                <span class="text-xs">
+            <div class="flex gap-2 self-end">
+                <span class="text-xs self-end">
                     H: {{ rounder(city.weather.daily[0].temp.max) }}&deg;
                 </span>
                 <span class="text-xs">
