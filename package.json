@@ -2,8 +2,9 @@
   "name": "whats-the-weather",
   "version": "1.0.0",
   "scripts": {
-    "dev": "concurrently \"npm run dev-backend\" \"npm run dev-frontend\"",
-    "dev-backend": "cd backend && nodemon index.js",
+  "start": "node backend/index.js",
+  "dev": "concurrently \"npm run dev-backend\" \"npm run dev-frontend\"",
+  "dev-backend": "cd backend && nodemon index.js",
     "dev-frontend": "cd vue-project && npm run dev"
   },
   "devDependencies": {

@@ -7,7 +7,12 @@ const axios = require('axios');
 const { z } = require('zod');
 
 const app = express();
-const port = 3000;
+
+app.use(express.static(path.join(__dirname, '../vue-project/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../vue-project/dist/index.html'));
+});
 
 const mapBoxUrl = 'https://api.mapbox.com/search/geocode/v6/forward';
 const mapboxAPIKey = process.env.MAPBOX_API_KEY;
@@ -51,6 +56,5 @@ app.get('/weather', async ({ query }, response) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
