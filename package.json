@@ -11,6 +11,9 @@
     "dotenv": "^16.4.7",
     "express": "^4.18.2"
   },
+  "engines": {
+    "node": "18.x"
+  },
   "postinstall": "cd vue-project && npm install && npm run build && cd ../backend && npm install",
   "devDependencies": {
     "concurrently": "^7.0.0"
