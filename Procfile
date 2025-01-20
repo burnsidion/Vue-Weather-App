@@ -1,1 +1,1 @@
-web: npm start
+web: npm install && npm run build --prefix vue-project && nodemon backend/index.js
