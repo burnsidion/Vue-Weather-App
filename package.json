@@ -2,10 +2,9 @@
   "name": "whats-the-weather",
   "version": "1.0.0",
   "scripts": {
-    "start": "node backend/index.js",
-    "dev": "concurrently \"npm run dev-backend\" \"npm run dev-frontend\"",
-    "dev-backend": "cd backend && nodemon index.js",
-    "dev-frontend": "cd vue-project && npm run dev"
+    "build-frontend": "cd vue-project && npm install && npm run build",
+    "build-backend": "cd backend && npm install --production",
+    "postinstall": "npm run build-frontend && npm run build-backend"
   },
   "dependencies": {
     "dotenv": "^16.4.7",
@@ -15,7 +14,6 @@
   "engines": {
     "node": "18.x"
   },
-  "postinstall": "cd vue-project && npm install && npm run build && cd ../backend && npm install",
   "devDependencies": {
     "concurrently": "^7.0.0"
   }
