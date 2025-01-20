@@ -1,6 +1,6 @@
 <template>
-  <main class="container text-white">
-    <div class="nfc-search-input pt-4 mb-8 relative">
+  <main class="container text-ivory-color">
+    <div class="nfc-search-input pt-4 mb-5 relative">
       <input 
         @input="getSearchResults"
         type="text"
@@ -13,7 +13,7 @@
         >
         <ul 
           v-if="mapboxSearchResults"
-          class="absolute bg-weather-city-search text-white w-full shadow-md py-2 px-1 top-[66px]">
+          class="absolute bg-weather-city-search text-ivory-color w-full shadow-md py-2 px-1 top-[66px]">
           <p v-if="searchError"> 
             Sorry, looks like he's dead, Jim. Please try again. 
           </p>
@@ -24,17 +24,18 @@
             <li
               v-for="searchResult in mapboxSearchResults"
               :key="searchResult.id"
-              class="py-2 cursor-pointer text-white"
+              class="py-2 cursor-pointer text-ivory-color"
               @click="previewCity(searchResult)"
               >
                 {{  searchResult.properties.full_address }}
             </li>
           </template>
         </ul>
+        <h1 class="mt-5 text-center text-xl">Your Currently Tracked Cities</h1>
     </div>
 
 
-    <div class="nfc-city-list flex flex-col gap-4">
+    <div class="nfc-city-list flex flex-col gap-4 border-4 border-weather-secondary">
       <Suspense>
         <CityList />
         

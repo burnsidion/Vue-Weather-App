@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1 class="mb-2 text-center text-xl">Your Currently Tracked Cities</h1>
     <div v-for="city in savedCities" :key="city.id">
       <CityCard 
         @click="goToCityView(city)"

@@ -5,7 +5,8 @@ module.exports = {
       colors: {
         'weather-primary': '#1d1e22',
         'weather-secondary': '#393f4d',
-        'weather-city-search': '#3f3f3f'
+        'weather-city-search': '#3f3f3f',
+        'ivory-color': '#FFF1E7'
       },
     },
     fontFamily: {

@@ -1,20 +1,20 @@
 <template>
     <div class="flex flex-col flex-1 items-center">
         <!-- Banner -->
-        <div v-if="route.query.preview" class="text-white p-4 bg-weather-secondary w-full text-center">
+        <div v-if="route.query.preview" class="text-ivory-color p-4 bg-weather-secondary w-full text-center">
             <p>
                 You are currently previewing this city, click the "+" to track this city!
             </p>
         </div>
         <div 
             v-show="showBanner"
-            v-if="!route.query.preview" class="text-white p-4 bg-weather-secondary w-full text-center">
+            v-if="!route.query.preview" class="text-ivory-color p-4 bg-weather-secondary w-full text-center">
             <p>
                 You are currently tracking this city!
             </p>
         </div>
         <!-- Weather Overview -->
-        <div class="flex flex-col items-center text-white py-12 ">
+        <div class="flex flex-col items-center text-ivory-color py-12 ">
             <h1 class="text-4xl mb-2"> {{ route.params.city }}</h1>
             <p class="text-sm mb-12">
                 {{ currentDate }}
@@ -40,9 +40,9 @@
 
         <!-- Hourly Weather  -->
         <div class="max-w-screen-md w-full py-12">
-            <div class="mx-8 text-white">
+            <div class="mx-8 text-ivory-color">
                 <h2 class="mb-4">
-                    Hourly Weather
+                    Hourly Weather 
                 </h2>
                 <div class="flex gap-10 overflow-x-scroll">
                     <div 
@@ -69,7 +69,7 @@
 
         <!-- Weekly Weather  -->
         <div class="max-w-screen-md w-full py-12">
-             <div class="mx-8 text-white">
+             <div class="mx-8 text-ivory-color">
                 <h2 class="mb-4"> 7 Day Forecast </h2>
                 <div 
                     v-for="day in weatherData.daily" 
@@ -92,7 +92,7 @@
         </div>
         <div
             v-if="!route.query.preview"
-            class="flex items-center gap-2 py-12 text-white cursor-pointer duration-150 hover:text-red-500 hover:animate-ping"
+            class="flex items-center gap-2 py-12 text-ivory-color cursor-pointer duration-150 hover:text-red-500 hover:animate-ping"
             @click="removeCity">
             <i class="fa-solid fa-trash"></i>
             <p>Remove City</p> 
@@ -104,9 +104,11 @@
 import axios from 'axios';
 import { useRoute, useRouter } from 'vue-router';
 import { computed, ref } from 'vue';
+import useRounder from '@/composables/useRounder';
 
 const route = useRoute();
 const router = useRouter();
+const { rounder } = useRounder();
 const showBanner = ref(true);
 const weatherUrl = `${import.meta.env.VITE_API_URL}/api/weather`;
 
@@ -175,10 +177,6 @@ const dayOfTheWeek = (/** @type {any} */ day) => {
 
 const dailyIcon = (/** @type {any} */ day) => {
     return day.weather[0].icon; 
-};
-
-const rounder = (value) => {
-    return Math.round(value);
 };
 
 const removeCity = () => {
