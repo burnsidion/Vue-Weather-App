@@ -31,11 +31,11 @@
             </li>
           </template>
         </ul>
-        <h1 class="mt-5 text-center text-xl">Your Currently Tracked Cities</h1>
+        <h1 class="mt-5 text-center text-2xl">Your Currently Tracked Cities</h1>
     </div>
 
 
-    <div class="nfc-city-list flex flex-col gap-4 border-4 border-weather-secondary">
+    <div class="nfc-city-list flex flex-col gap-4 border-4 border-weather-secondary h-[600px] overflow-y-scroll">
       <Suspense>
         <CityList />
         
