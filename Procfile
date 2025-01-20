@@ -1,1 +1,1 @@
-web: npm run postinstall && npm start
+web: node backend/index.js
