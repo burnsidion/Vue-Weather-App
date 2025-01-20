@@ -25,12 +25,12 @@
 
 <script setup>
 import { computed } from 'vue';
-defineProps({
-    city: { 
-        type: Object,
-        default: () => {},
-    }
-})
+const { city } = defineProps({
+  city: { 
+    type: Object,
+    default: () => {},
+  }
+});
 
 const weatherIcon = (city) => {
     return city.weather.current.weather[0].icon;

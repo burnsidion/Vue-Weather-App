@@ -58,7 +58,7 @@ const searchQuery = ref("");
 const queryTimeout = ref(null);
 const mapboxSearchResults = ref(null);
 const searchError = ref(null)
-const mapBoxUrl = `http://localhost:3000/`;
+const mapBoxUrl = `${import.meta.env.VITE_API_URL}/api/search`;
 const trackedCities = ref([]);
 
 const route = useRoute();

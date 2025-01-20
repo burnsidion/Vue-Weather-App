@@ -23,6 +23,8 @@ import { useRouter } from "vue-router";
 
 const savedCities = ref([]);
 
+const weatherUrl = `${import.meta.env.VITE_API_URL}/api/weather`;
+
 const getCities = async () => {
   if(localStorage.getItem('savedCities')) {
     savedCities.value = JSON.parse(
@@ -31,7 +33,7 @@ const getCities = async () => {
 
     const requests = [];
     savedCities.value.forEach(( /** @type {any} */city) => {
-      requests.push(axios.get( `http://localhost:3000/weather?q=${encodeURI(JSON.stringify({
+      requests.push(axios.get( `${weatherUrl}?q=${encodeURI(JSON.stringify({
           city: city.city, 
           state: city.state, 
           lat: city.coords.lat,

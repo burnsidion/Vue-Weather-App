@@ -107,13 +107,14 @@ import { computed, ref } from 'vue';
 const route = useRoute();
 const router = useRouter();
 const showBanner = ref(true);
+const weatherUrl = `${import.meta.env.VITE_API_URL}/api/weather`;
 
 if(!route.params.preview) {
     setTimeout(() => showBanner.value = false, 3000)
 }
 const getWeatherData = async (_route=route) => {
     try {
-        const weather = await axios.get( `http://localhost:3000/weather?q=${encodeURI(JSON.stringify({
+        const weather = await axios.get( `${weatherUrl}?q=${encodeURI(JSON.stringify({
             city: route.params.city, 
             state: route.params.state, 
             lat: route.query['lat'],
