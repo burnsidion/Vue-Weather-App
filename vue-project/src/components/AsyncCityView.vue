@@ -90,7 +90,8 @@
                 </div>
              </div>
         </div>
-        <div 
+        <div
+            v-if="!route.query.preview"
             class="flex items-center gap-2 py-12 text-white cursor-pointer duration-150 hover:text-red-500 hover:animate-ping"
             @click="removeCity">
             <i class="fa-solid fa-trash"></i>
