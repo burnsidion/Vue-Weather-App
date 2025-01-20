@@ -35,7 +35,7 @@
     </div>
 
 
-    <div class="nfc-city-list flex flex-col gap-4 border-4 border-weather-secondary h-[600px] overflow-y-scroll">
+    <div class="nfc-city-list flex flex-col gap-4 h-[600px] overflow-y-scroll">
       <Suspense>
         <CityList />
         

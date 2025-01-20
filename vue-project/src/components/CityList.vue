@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="border-4 border-weather-secondary">
     <div v-for="city in savedCities" :key="city.id">
       <CityCard 
         @click="goToCityView(city)"
