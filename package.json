@@ -7,6 +7,7 @@
   "dev-backend": "cd backend && nodemon index.js",
     "dev-frontend": "cd vue-project && npm run dev"
   },
+  "postinstall": "cd vue-project && npm install && npm run build",
   "devDependencies": {
     "concurrently": "^7.0.0"
   }
