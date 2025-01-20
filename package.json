@@ -8,13 +8,13 @@
   },
   "dependencies": {
     "dotenv": "^16.4.7",
-    "express": "^4.18.2",
-    "vite": "^6.0.7"
+    "express": "^4.18.2"
   },
   "engines": {
-    "node": "18.x"
+    "node": "22.x"
   },
   "devDependencies": {
-    "concurrently": "^7.0.0"
+    "concurrently": "^7.0.0",
+    "vite": "^6.0.7"
   }
 }
